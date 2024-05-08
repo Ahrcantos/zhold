@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<h1> Pinyin Input </h1>
+
+
+<style>
+</style>
+
+<div class="character-creator">
+  <div class="left">
+  </div>
+  <div class="right">
+    <label>
+      Full character
+    </label>
+    <input id="full-character-checkbox" type="checkbox" />
+    <div class="right">
+      <span>Parts</span>
+      <button>Add</button>
+    </div>
+  </div>
+</div>
+
+<template id="full-character-details-template">
+  <div id="full-character-details">
+    <label>Pinyin</label>
+    <input type="text" />
+
+    <label>Translation</label>
+    <input type="text" />
+  </div>
+</template>
+
+<template id="character">
+</template>
+
+<script type="module">
+
+const fullCharacterCheckbox = document.getElementById('full-character-checkbox');
+
+let isFullCharacter = false;
+
+fullCharacterCheckbox.addEventListener('change', (event) => {
+  isFullCharacter = !isFullCharacter;
+
+
+  if(isFullCharacter) {
+    const template = document.getElementById('full-character-details-template');
+    const clone = template.content.cloneNode(true);
+    document.querySelector('.character-creator .right').prepend(clone);
+  } else {
+    document.getElementById('full-character-details').remove();
+  }
+})
+
+</script>
+
+{% endblock %}
